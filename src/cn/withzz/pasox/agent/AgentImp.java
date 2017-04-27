@@ -2,6 +2,8 @@ package cn.withzz.pasox.agent;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
+import cn.withzz.pasox.test.Test;
+
 public class AgentImp implements Agent {
 	public String name="Agent";
 	public boolean isWorking=false;
@@ -19,7 +21,7 @@ public class AgentImp implements Agent {
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
-					long time=(long) ((long) (1000+Math.random()*10000));
+					long time=(long) ((long) (1000+Math.random()*30000));
 //					System.out.println(AgentImp.this.name+"发送"+msg+"到"+target+"历时"+time);
 					Thread.sleep(time);
 					ai.lbq.push(msg);
@@ -47,7 +49,7 @@ public class AgentImp implements Agent {
 				while(isWorking){
 					try {
 						Thread.sleep(speed);
-						if(!lbq.isEmpty())
+						if(Test.msg.equals("消息")&&!lbq.isEmpty())
 							AgentImp.this.receiveMsg(lbq.pop());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block

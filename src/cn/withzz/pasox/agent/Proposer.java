@@ -7,6 +7,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import cn.withzz.pasox.data.AccResponse;
 import cn.withzz.pasox.data.ProRequest;
 import cn.withzz.pasox.data.ProRequest.Type;
+import cn.withzz.pasox.test.Test;
 import cn.withzz.pasox.util.NumCreater;
 
 public class Proposer extends AgentImp {
@@ -100,6 +101,7 @@ public class Proposer extends AgentImp {
 				break;
 			case 2:
 					// 告知所有learner
+					Test.msg="达成共识"+this.v;
 					this.stop();
 				break;
 			}
@@ -118,7 +120,7 @@ public class Proposer extends AgentImp {
 	@Override
 	public String toString() {
 		return name+" [num=" + num + ", v=" + v + ", phase=" + phase
-				+ ", okNum=" + okNum + ", errNum=" + errNum + ", chosen="+!isWorking+"]";
+				+ ", okNum=" + okNum + ", errNum=" + errNum + ", isWorking="+isWorking+"]";
 	}
 
 	public List<AccResponse> getArList() {

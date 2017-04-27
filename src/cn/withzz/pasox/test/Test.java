@@ -1,6 +1,8 @@
 package cn.withzz.pasox.test;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +24,10 @@ public class Test {
 		final List<Proposer> proList=new ArrayList<Proposer>(); 
 		
 		for (int i = 0; i < 5; i++) {
-			acList.add(new Acceptor("acceptor"+i));
+			acList.add(new Acceptor("acceptor"+(i+1)));
 		}
-		for (int i = 0; i < 2; i++) {
-			proList.add(new Proposer("Proposer"+i,acList));
+		for (int i = 0; i < 5; i++) {
+			proList.add(new Proposer("Proposer"+(i+1),acList));
 		}
 		for (Proposer proposer : proList) {
 			proposer.start();
@@ -73,6 +75,31 @@ public class Test {
         };    
         // 添加面板
         panel=mpanel;
+        frame.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(e.getKeyChar());
+				Proposer p=proList.get(Integer.valueOf(e.getKeyChar())-49);
+				if(p.isWorking)
+					p.stop();
+				else
+					p.start();
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
         frame.add(panel);
 
         // 设置界面可见
